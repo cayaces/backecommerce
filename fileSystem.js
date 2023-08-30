@@ -28,29 +28,37 @@ class ProductManager {
 
     readProducts = async () => {
         let respuesta = await fs.readFile(this.patch, "utf-8")
-        return JSON.parse(respuesta)
+        return JSON.parse(respuesta);
     }
 
     getProducts = async () => {
-        let resp = await this.readProducts()
-       return console.log(resp)
+        // let resp = await this.readProducts()
+        //return console.log(resp)
     }
 
     getProductsById = async (id) => {
-        let respu = await this.readProducts()
-       if(!respu.find(product => product.id === id)){
-        console.log("Producto no encontrado")
-       } else {
-        console.log(respu.find((product) => product.id === id));
-       }
+        let respu = await this.readProducts();
+        if (!respu.find((product) => product.id === id)) {
+            console.log("Producto no encontrado");
+        } else {
+            console.log(respu.find((product) => product.id === id));
+        }
+    };
 
-       console.log(filter)
-    }
+    deleteProductsById = async (id) => {
+        let respu = await this.readProducts();
+        let filterProduct = respu.filter(productos => productos.id != id)
+        await fs.writeFile(this.patch, JSON.stringify(filterProduct));
+        console.log("Producto Eliminado")
+    };
 
-
+    actualizarProductos = async ({ id, ...producto }) => {
+        await this.deleteProductsById(id);
+        let prodOld = await this.readProducts()
+        let prodMod = [{ id, ...producto }, ...prodOld];
+        await fs.writeFile(this.patch, JSON.stringify(prodMod));
+    };
 }
-
-
 
 const elementos = new ProductManager();
 
@@ -58,4 +66,16 @@ const elementos = new ProductManager();
 elementos.addProduct("TituloDos", "DescripcionDos", 1000, "ImagenDos", "abc2", 10)
 elementos.addProduct("TituloTres", "DescripcionTres", 1000, "ImagenTres", "abc3", 15)*/
 
-elementos.getProductsById(1)
+//elementos.getProducts();
+//elementos.getProductsById(1);
+//elementos.deleteProductsById(2)
+
+elementos.actualizarProductos({
+    "titulo": "TituloTres",
+    "descripcion": "DescripcionTres",
+    "precio": 4000,
+    "imagen": "ImagenTres",
+    "codigo": "abc3",
+    "stock": 15,
+    "id": 3
+})

@@ -1,1 +1,1 @@
-[{"titulo":"TituloUno","descripcion":"DescripcionUno","precio":2000,"imagen":"ImagenUno","codigo":"abc1","stock":5,"id":1},{"titulo":"TituloDos","descripcion":"DescripcionDos","precio":1000,"imagen":"ImagenDos","codigo":"abc2","stock":10,"id":2}]{"titulo":"TituloTres","descripcion":"DescripcionTres","precio":1000,"imagen":"ImagenTres","codigo":"abc3","stock":15,"id":3}]
+[{"titulo":"TituloUno","descripcion":"DescripcionUno","precio":2000,"imagen":"ImagenUno","codigo":"abc1","stock":5,"id":1}]
